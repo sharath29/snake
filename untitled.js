@@ -7,6 +7,7 @@ var mc;
 
 function setup() {
 	var myCan = createCanvas(windowWidth, windowHeight);
+	console.log(windowWidth,windowHeight);
   mc = new Hammer(myCan.elt);
 	mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 	setupDoubleTap();
@@ -18,9 +19,9 @@ function setup() {
 }
 
 function pickLocation() {
-  var cols = floor(windowHeight/scl);
-  var rows = floor(windowWidth/scl);
-  food = createVector(floor(random(cols)), floor(random(rows)));
+  var cols = floor(windowWidth/scl);
+  var rows = floor(windowHeight/scl);
+  food = createVector(floor(random(0,cols)), floor(random(0,rows)));
   food.mult(scl);
 	console.log(food);
 }
