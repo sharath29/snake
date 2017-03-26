@@ -1,7 +1,7 @@
 var s;
 var scl = 20;
-var food;
 
+var food;
 var mc;
 
 
@@ -18,13 +18,15 @@ function setup() {
 }
 
 function pickLocation() {
-  var cols = floor(windowHeight/scl);
-  var rows = floor(windowWidth/scl);
+  var cols = floor(width/scl);
+  var rows = floor(height/scl);
   food = createVector(floor(random(cols)), floor(random(rows)));
   food.mult(scl);
-	console.log(food);
 }
 
+function mousePressed() {
+  s.total++;
+}
 
 function draw() {
   background(51);
@@ -32,7 +34,6 @@ function draw() {
   if (s.eat(food)) {
     pickLocation();
   }
-
   s.death();
   s.update();
   s.show();
@@ -65,7 +66,7 @@ function Snake() {
 
   this.eat = function(pos) {
     var d = dist(this.x, this.y, pos.x, pos.y);
-    if (d < 10) {
+    if (d < 1) {
       this.total++;
       return true;
     } else {
@@ -97,16 +98,12 @@ function Snake() {
       }
     }
     this.tail[this.total - 1] = createVector(this.x, this.y);
-		if(this.x < 0){
-			this.x += windowWidth;
-		}
-		if(this.y < 0){
-			this.y += windowHeight;
-		}
-    this.x = (this.x + this.xspeed * scl)%windowWidth;
-    this.y = (this.y + this.yspeed * scl)%windowHeight;
-	  // this.x = constrain(this.x, 0, width - scl);
-    // this.y = constrain(this.y, 0, height - scl);
+
+    this.x = this.x + this.xspeed * scl;
+    this.y = this.y + this.yspeed * scl;
+
+    this.x = constrain(this.x, 0, width - scl);
+    this.y = constrain(this.y, 0, height - scl);
   }
 
   this.show = function() {
