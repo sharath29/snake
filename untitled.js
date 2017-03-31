@@ -43,7 +43,7 @@ function draw() {
   rect(food.x, food.y, scl, scl);
 }
 
-
+//on computer
 function keyPressed() {
   if (keyCode === UP_ARROW && s.yspeed!=1) {
     s.dir(0, -1);
@@ -119,18 +119,22 @@ function Snake() {
 
   }
 }
-
+//swipe on phones
 function setupDoubleTap() {
   mc.on("swipeleft", function(e){
-		s.dir(-1, 0);
+		if(s.xspeed!=1)
+			s.dir(-1, 0);
   });
 	mc.on("swiperight", function(e){
-		s.dir(1, 0);
+		if(s.xspeed!=-1)
+			s.dir(1, 0);
   });
 	mc.on("swipeup", function(e){
-		s.dir(0, -1);
+		if(s.yspeed!=-1)
+			s.dir(0, -1);
   });
 	mc.on("swipedown", function(e){
-		s.dir(0, 1);
+		if(s.yspeed!=-1)
+			s.dir(0, 1);
   });
 }
